@@ -3,3 +3,7 @@ export interface TranslationDescProp {
   languageFrom: string
   languageTo: string
 }
+
+export interface OptionProp {
+  option: string
+}
