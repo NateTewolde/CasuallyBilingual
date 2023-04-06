@@ -1,15 +1,17 @@
 import React from "react"
 
+import type { OptionInfo, OptionsArray } from "~types/common"
+
 import Option from "./Option"
 
 //Takes in a list of options as a prop to display.
-const ConfigOptions = (options: string[]) => {
+const ConfigOptions = ({ optionsArray }: OptionsArray) => {
   return (
     <div>
       <button>+Options</button>
       <ul>
-        {options.map((option) => {
-          return <Option option={option} />
+        {optionsArray.map((option) => {
+          return <Option optionInfo={option} />
         })}
       </ul>
     </div>

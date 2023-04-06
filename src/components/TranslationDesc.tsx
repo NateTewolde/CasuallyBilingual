@@ -2,14 +2,10 @@ import React from "react"
 
 import type { TranslationDescProp } from "~types/common"
 
-const TranslationDesc = ({
-  percent,
-  languageFrom,
-  languageTo
-}: TranslationDescProp) => {
+const TranslationDesc = ({ translateInfo }: TranslationDescProp) => {
   return (
     <div>
-      <p>{`${percent} of all ${languageFrom} into ${languageTo}`}</p>
+      <p>{`${translateInfo.percent} of all ${translateInfo.languageFrom} into ${translateInfo.languageTo}`}</p>
     </div>
   )
 }

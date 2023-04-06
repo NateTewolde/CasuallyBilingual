@@ -1,11 +1,7 @@
 import React from "react"
 
 const Title = () => {
-  return (
-    <div>
-      <h1>Casually Bilingual</h1>
-    </div>
-  )
+  return <h1>Casually Bilingual</h1>
 }
 
 export default Title
