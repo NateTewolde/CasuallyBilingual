@@ -1,3 +1,5 @@
+import React from "react"
+
 import type { TranslationDescProp } from "~types/common"
 
 const TranslationDesc = ({
