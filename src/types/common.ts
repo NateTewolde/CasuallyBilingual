@@ -2,6 +2,7 @@ export interface OptionInfo {
   option: string
   optionType: string
   optionVal: string
+  handleOptionChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 export interface OptionsArray {
   optionsArray: OptionInfo[]
