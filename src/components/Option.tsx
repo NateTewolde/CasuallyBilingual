@@ -6,6 +6,7 @@ const Option = ({ optionInfo }: OptionProp) => {
   return (
     <div>
       <p>{`${optionInfo.option}`}</p>
+      <input defaultValue={optionInfo.optionVal}></input>
     </div>
   )
 }
