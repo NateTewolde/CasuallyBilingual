@@ -1,7 +1,8 @@
-import React from "react"
+import React from "react";
+import type { UpdateOptionsBtnProp } from "~types/common";
 
-const UpdateOptionsBtn = () => {
-  return <button>Update</button>
-}
+const UpdateOptionsBtn = ({ handleUpdateClick }: UpdateOptionsBtnProp) => {
+  return <button onClick={handleUpdateClick}>Update</button>;
+};
 
-export default UpdateOptionsBtn
+export default UpdateOptionsBtn;
