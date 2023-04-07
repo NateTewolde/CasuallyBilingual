@@ -1,5 +1,7 @@
 export interface OptionInfo {
   option: string
+  optionType: string
+  optionVal: string
 }
 export interface OptionsArray {
   optionsArray: OptionInfo[]
