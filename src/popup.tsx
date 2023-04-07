@@ -1,7 +1,27 @@
-import { useState } from "react"
+import React, { useState } from "react"
+
+import ActiveToggle from "~components/ActiveToggle"
+import ConfigOptions from "~components/ConfigOptions"
+import Title from "~components/Title"
+import TranslationDesc from "~components/TranslationDesc"
+import type { OptionInfo, TranslationInfo } from "~types/common"
 
 function IndexPopup() {
-  const [data, setData] = useState("")
+  //const [data, setData] = useState("")
+  //  <input onChange={(e) => setData(e.target.value)} value={data} />
+
+  const optionsArray: OptionInfo[] = [
+    { option: "Percent translated?" },
+    { option: "From?" },
+    { option: "To?" },
+    { option: "Text color" }
+  ]
+
+  const translateInfo: TranslationInfo = {
+    percent: 15,
+    languageFrom: `English`,
+    languageTo: `Arabic`
+  }
 
   return (
     <div
@@ -10,11 +30,10 @@ function IndexPopup() {
         flexDirection: "column",
         padding: 16
       }}>
-      <h1>
-        Welcome to your <a href="https://www.plasmo.com">Plasmo</a> Extension!
-      </h1>
-      <input onChange={(e) => setData(e.target.value)} value={data} />
-      <footer>Crafted by @PlamoHQ</footer>
+      <Title />
+      <ActiveToggle />
+      <TranslationDesc translateInfo={translateInfo} />
+      <ConfigOptions optionsArray={optionsArray} />
     </div>
   )
 }
