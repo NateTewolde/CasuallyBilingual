@@ -10,18 +10,19 @@ function IndexPopup() {
   //const [data, setData] = useState("")
   //  <input onChange={(e) => setData(e.target.value)} value={data} />
 
+  const [percent, setPercent] = useState(15)
+  const [languageFrom, setLanguageFrom] = useState(`English`)
+  const [languageTo, setLanguageTo] = useState("Arabic")
+
   const optionsArray: OptionInfo[] = [
-    { option: "Percent translated?" },
-    { option: "From?" },
-    { option: "To?" },
-    { option: "Text color" }
+    { option: "Percent?", optionType: "percent", optionVal: `${percent}` },
+    { option: "From?", optionType: "languageFrom", optionVal: languageFrom },
+    { option: "To?", optionType: "languageTo", optionVal: languageTo }
   ]
 
-  const translateInfo: TranslationInfo = {
-    percent: 15,
-    languageFrom: `English`,
-    languageTo: `Arabic`
-  }
+  // const handleOptionChange = (e) => {
+  //   console.log(e)
+  // }
 
   return (
     <div
@@ -32,7 +33,7 @@ function IndexPopup() {
       }}>
       <Title />
       <ActiveToggle />
-      <TranslationDesc translateInfo={translateInfo} />
+      <TranslationDesc translateInfo={{ percent, languageFrom, languageTo }} />
       <ConfigOptions optionsArray={optionsArray} />
     </div>
   )
