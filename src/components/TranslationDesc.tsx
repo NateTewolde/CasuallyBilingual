@@ -5,7 +5,7 @@ import type { TranslationDescProp } from "~types/common"
 const TranslationDesc = ({ translateInfo }: TranslationDescProp) => {
   return (
     <div>
-      <p>{`${translateInfo.percent} of all ${translateInfo.languageFrom} into ${translateInfo.languageTo}`}</p>
+      <p>{`${translateInfo.percent}% of all ${translateInfo.languageFrom} words into ${translateInfo.languageTo}`}</p>
     </div>
   )
 }
