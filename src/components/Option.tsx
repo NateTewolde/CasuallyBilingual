@@ -5,7 +5,7 @@ import type { OptionProp } from "~types/common"
 const Option = ({ optionInfo }: OptionProp) => {
   return (
     <div>
-      <p>{`${optionInfo}`}</p>
+      <p>{`${optionInfo.option}`}</p>
     </div>
   )
 }
