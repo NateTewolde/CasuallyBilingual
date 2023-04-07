@@ -5,11 +5,13 @@ import type { OptionProp } from "~types/common"
 const Option = ({ optionInfo }: OptionProp) => {
   return (
     <div>
-      <p>{`${optionInfo.option}`}</p>
-      <input
-        data-label={optionInfo.optionType}
-        onChange={optionInfo.handleOptionChange}
-        defaultValue={optionInfo.optionVal}></input>
+      <label>
+        {`${optionInfo.option}`}
+        <input
+          data-label={optionInfo.optionType}
+          onChange={optionInfo.handleOptionChange}
+          defaultValue={optionInfo.optionVal}></input>
+      </label>
     </div>
   )
 }
