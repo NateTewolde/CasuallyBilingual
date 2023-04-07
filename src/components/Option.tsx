@@ -6,7 +6,10 @@ const Option = ({ optionInfo }: OptionProp) => {
   return (
     <div>
       <p>{`${optionInfo.option}`}</p>
-      <input defaultValue={optionInfo.optionVal}></input>
+      <input
+        data-label={optionInfo.optionType}
+        onChange={optionInfo.handleOptionChange}
+        defaultValue={optionInfo.optionVal}></input>
     </div>
   )
 }
