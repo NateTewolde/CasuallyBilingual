@@ -1,4 +1,5 @@
-import React, { useRef, useState, ChangeEvent } from "react";
+import { useStorage } from "@plasmohq/storage/hook";
+import React, { useRef, useState } from "react";
 import ActiveToggle from "~components/ActiveToggle";
 import ConfigOptions from "~components/ConfigOptions";
 import Title from "~components/Title";
@@ -7,9 +8,12 @@ import UpdateOptionsBtn from "~components/UpdateOptionsBtn";
 import type { OptionInfo, TranslationInfo } from "~types/common";
 
 function IndexPopup() {
-  const [percent, setPercent] = useState(15);
-  const [languageFrom, setLanguageFrom] = useState(`English`);
-  const [languageTo, setLanguageTo] = useState("Arabic");
+  const [percent, setPercent] = useStorage("percentKey", 15);
+  const [languageFrom, setLanguageFrom] = useStorage(
+    "languageFromKey",
+    `English`
+  );
+  const [languageTo, setLanguageTo] = useStorage("languageToKey", "Arabic");
 
   const optionRefs = {
     percentRef: useRef({ optionLabel: "percent", optionValue: percent }),
