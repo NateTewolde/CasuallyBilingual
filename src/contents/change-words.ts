@@ -1,7 +1,4 @@
-function isWord(text: string): boolean {
-  const regex = /^[\p{L}\p{M}]+$/u; // A regular expression that matches Unicode letters
-  return regex.test(text); // Test if the input text matches the regular expression
-}
+import { isWord, isInsideAttribute } from "./text-utils";
 
 const replacePercentageOfWords = (text: string, percentage: number): string => {
   const words = text.split(" ");
@@ -15,14 +12,6 @@ const replacePercentageOfWords = (text: string, percentage: number): string => {
     words[i] = "CHANGED";
   }
   return words.join(" ");
-};
-
-const isInsideAttribute = (node: Node): boolean | null => {
-  return (
-    node.parentNode &&
-    node.parentNode.nodeType === Node.ELEMENT_NODE &&
-    ["SCRIPT", "STYLE"].includes(node.parentNode.nodeName.toUpperCase())
-  );
 };
 
 const traverseNodes = (node: Node, percent: number) => {
@@ -39,8 +28,8 @@ const traverseNodes = (node: Node, percent: number) => {
   }
 };
 
-const changeWords = (percent: number) => {
+const addSpan = (percent: number) => {
   traverseNodes(document.body, percent);
 };
 
-export default changeWords;
+export default addSpan;
