@@ -1,6 +1,6 @@
 import { isWord, isInsideAttribute } from "./text-utils";
 
-const replacePercentageOfWords = (text: string, percentage: number): string => {
+const wrapWordsInSpan = (text: string, percentage: number): string => {
   const words = text.split(" ");
   const wordsToReplace = Math.floor(words.length * (percentage / 100));
   const step = Math.floor(words.length / wordsToReplace);
@@ -9,7 +9,9 @@ const replacePercentageOfWords = (text: string, percentage: number): string => {
     if (words[i].length === 0 || !isWord(words[i])) {
       continue;
     }
-    words[i] = "CHANGED";
+    words[
+      i
+    ] = `<span style="color:blue" class="casually-bilingual-custom">${words[i]}</span>`;
   }
   return words.join(" ");
 };
@@ -20,7 +22,9 @@ const traverseNodes = (node: Node, percent: number) => {
     node.textContent?.trim() &&
     !isInsideAttribute(node)
   ) {
-    node.textContent = replacePercentageOfWords(node.textContent, percent);
+    const newNode = document.createElement("span");
+    newNode.innerHTML = wrapWordsInSpan(node.textContent as string, percent);
+    node.parentNode?.replaceChild(newNode, node);
   } else {
     for (const child of node.childNodes) {
       traverseNodes(child, percent);
