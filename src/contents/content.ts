@@ -1,6 +1,5 @@
+import translatePage from "./translate";
 import { Storage } from "@plasmohq/storage";
-
-export {};
 
 const storage = new Storage();
 
@@ -9,9 +8,7 @@ async function getStateValues() {
   const languageFrom = await storage.get("languageFromKey");
   const languageTo = await storage.get("languageToKey");
 
-  console.log("Percent:", percent);
-  console.log("Language From:", languageFrom);
-  console.log("Language To:", languageTo);
+  translatePage(percent, languageFrom, languageTo);
 }
 
 getStateValues();
