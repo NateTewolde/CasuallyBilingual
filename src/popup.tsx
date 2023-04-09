@@ -56,6 +56,13 @@ function IndexPopup() {
     setPercent(optionRefs.percentRef.current.optionValue);
     setLanguageFrom(optionRefs.languageFromRef.current.optionValue);
     setLanguageTo(optionRefs.languageToRef.current.optionValue);
+
+    // Send a message to the content script to reload the page
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+      if (tabs[0].id) {
+        chrome.tabs.sendMessage(tabs[0].id, { action: "refresh_page" });
+      }
+    });
   };
 
   const optionsArray: OptionInfo[] = [
