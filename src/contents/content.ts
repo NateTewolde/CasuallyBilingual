@@ -1,14 +1,19 @@
-import translatePage from "./translate";
+import addSpan from "./change-words";
 import { Storage } from "@plasmohq/storage";
 
 const storage = new Storage();
 
-async function getStateValues() {
+async function getOptionValues() {
   const percent = await storage.get("percentKey");
   const languageFrom = await storage.get("languageFromKey");
   const languageTo = await storage.get("languageToKey");
 
-  translatePage(percent, languageFrom, languageTo);
+  return { percent, languageFrom, languageTo };
 }
 
-getStateValues();
+async function main() {
+  const { percent, languageFrom, languageTo } = await getOptionValues();
+  addSpan(Number(percent));
+}
+
+main();
