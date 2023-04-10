@@ -1,4 +1,4 @@
-import addSpan from "./change-words";
+import { addSpan, translateSpanWords } from "./change-words";
 import { Storage } from "@plasmohq/storage";
 
 const storage = new Storage();
@@ -14,6 +14,7 @@ async function getOptionValues() {
 async function main() {
   const { percent, languageFrom, languageTo } = await getOptionValues();
   addSpan(Number(percent));
+  translateSpanWords(languageFrom, languageTo);
 }
 
-main();
+window.addEventListener("load", main);
