@@ -1,4 +1,4 @@
-import { addSpan, translateSpanWords } from "./change-words";
+import { addSpan, applyColorToSpans, translateSpanWords } from "./change-words";
 import { Storage } from "@plasmohq/storage";
 
 const storage = new Storage();
@@ -15,6 +15,7 @@ async function main() {
   const { percent, languageFrom, languageTo } = await getOptionValues();
   addSpan(Number(percent));
   translateSpanWords(languageFrom, languageTo);
+  applyColorToSpans("green");
 }
 
 window.addEventListener("load", main);
