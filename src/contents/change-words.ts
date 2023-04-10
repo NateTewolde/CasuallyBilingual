@@ -63,12 +63,15 @@ const translateSpanWords = async (languageFrom: string, languageTo: string) => {
       languageFrom,
       languageTo
     );
-    const translatedWords = translatedBatchText.split("\n");
 
-    for (let i = 0; i < batch.length; i++) {
-      const translatedText = translatedWords[i];
-      if (translatedText) {
-        batch[i].textContent = translatedText;
+    if (translatedBatchText) {
+      const translatedWords = translatedBatchText.split("\n");
+
+      for (let i = 0; i < batch.length; i++) {
+        const translatedText = translatedWords[i];
+        if (translatedText) {
+          batch[i].textContent = translatedText;
+        }
       }
     }
 
@@ -76,8 +79,21 @@ const translateSpanWords = async (languageFrom: string, languageTo: string) => {
   }
 };
 
+const applyColorToSpans = (color: string) => {
+  const spanElements = document.querySelectorAll<HTMLElement>(
+    ".casually-bilingual-custom"
+  );
+
+  for (const spanElement of spanElements) {
+    spanElement.style.color = color;
+  }
+};
+
+// Usage example:
+applyColorToSpans("red");
+
 const addSpan = (percent: number) => {
   traverseNodes(document.body, percent);
 };
 
-export { addSpan, translateSpanWords };
+export { addSpan, translateSpanWords, applyColorToSpans };
