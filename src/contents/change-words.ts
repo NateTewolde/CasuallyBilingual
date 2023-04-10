@@ -10,9 +10,7 @@ const wrapWordsInSpan = (text: string, percentage: number): string => {
     if (words[i].length === 0 || !isWord(words[i])) {
       continue;
     }
-    words[
-      i
-    ] = `<span style="color:blue" class="casually-bilingual-custom">${words[i]}</span>`;
+    words[i] = `<span class="casually-bilingual-custom">${words[i]}</span>`;
   }
   return words.join(" ");
 };
