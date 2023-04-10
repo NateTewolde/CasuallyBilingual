@@ -1,4 +1,5 @@
 import { isWord, isInsideAttribute } from "./text-utils";
+import translateWord from "./translate";
 
 const wrapWordsInSpan = (text: string, percentage: number): string => {
   const words = text.split(" ");
@@ -32,8 +33,51 @@ const traverseNodes = (node: Node, percent: number) => {
   }
 };
 
+const translateSpanWords = async (languageFrom: string, languageTo: string) => {
+  const spannedWords = document.querySelectorAll<HTMLElement>(
+    ".casually-bilingual-custom"
+  );
+
+  const batchSize = 5000;
+  let batchStart = 0;
+  let batchEnd = 0;
+
+  while (batchStart < spannedWords.length) {
+    let batchTextLength = 0;
+    for (batchEnd = batchStart; batchEnd < spannedWords.length; batchEnd++) {
+      const textContent = spannedWords[batchEnd].textContent;
+      if (textContent) {
+        batchTextLength += textContent.length;
+        if (batchTextLength > batchSize) {
+          break;
+        }
+      }
+    }
+
+    const batch = Array.from(spannedWords).slice(batchStart, batchEnd);
+    const batchText = batch
+      .map((element) => element.textContent || "")
+      .join("\n");
+    const translatedBatchText = await translateWord(
+      batchText,
+      languageFrom,
+      languageTo
+    );
+    const translatedWords = translatedBatchText.split("\n");
+
+    for (let i = 0; i < batch.length; i++) {
+      const translatedText = translatedWords[i];
+      if (translatedText) {
+        batch[i].textContent = translatedText;
+      }
+    }
+
+    batchStart = batchEnd;
+  }
+};
+
 const addSpan = (percent: number) => {
   traverseNodes(document.body, percent);
 };
 
-export default addSpan;
+export { addSpan, translateSpanWords };
