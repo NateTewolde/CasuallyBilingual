@@ -27,3 +27,7 @@ export interface UpdateOptionsBtnProp {
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => void;
 }
+
+export interface WordInfoProp {
+  word: string;
+}
