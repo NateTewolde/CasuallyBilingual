@@ -77,7 +77,7 @@ const translateSpanWords = async (languageFrom: string, languageTo: string) => {
   }
 };
 
-const applyColorToSpans = (color: string) => {
+const setTextColor = (color: string) => {
   const spanElements = document.querySelectorAll<HTMLElement>(
     ".casually-bilingual-custom"
   );
@@ -87,11 +87,8 @@ const applyColorToSpans = (color: string) => {
   }
 };
 
-// Usage example:
-applyColorToSpans("red");
-
 const addSpan = (percent: number) => {
   traverseNodes(document.body, percent);
 };
 
-export { addSpan, translateSpanWords, applyColorToSpans };
+export { addSpan, translateSpanWords, setTextColor };
