@@ -29,5 +29,5 @@ export interface UpdateOptionsBtnProp {
 }
 
 export interface WordInfoProp {
-  word: string;
+  content: string;
 }
