@@ -1,4 +1,5 @@
 import { addSpan, setTextColor, translateSpanWords } from "./change-words";
+import attachWordInfo from "./diplay-word-info";
 import { Storage } from "@plasmohq/storage";
 
 const storage = new Storage();
@@ -16,6 +17,7 @@ async function main() {
   addSpan(Number(percent));
   translateSpanWords(languageFrom, languageTo);
   setTextColor("green");
+  attachWordInfo();
 }
 
 window.addEventListener("load", main);
