@@ -28,6 +28,7 @@ function attachWordInfo() {
       translatedWord: span.getAttribute("data-translated-word"),
       languageFrom: span.getAttribute("data-language-from"),
       languageTo: span.getAttribute("data-language-to"),
+      textColor: span.getAttribute("data-text-color"),
     };
 
     span.addEventListener("mouseenter", () => {
