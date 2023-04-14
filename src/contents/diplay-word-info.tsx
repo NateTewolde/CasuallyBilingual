@@ -1,8 +1,9 @@
 import React from "react";
-import { render } from "react-dom";
+import { createRoot } from "react-dom/client";
 import WordInfo from "~components/WordInfo";
+import type { WordInfoObject } from "~types/common";
 
-function showWordInfo(content: string, x: number, y: number) {
+function showWordInfo(wordInfo: WordInfoObject, x: number, y: number) {
   const container = document.createElement("div");
   container.style.position = "fixed";
   container.style.left = `${x + 10}px`;
@@ -10,7 +11,8 @@ function showWordInfo(content: string, x: number, y: number) {
   container.style.zIndex = "1000";
   document.body.appendChild(container);
 
-  render(<WordInfo content={content} />, container);
+  const root = createRoot(container);
+  root.render(<WordInfo wordInfo={wordInfo} />);
 
   return container;
 }
@@ -21,20 +23,27 @@ function attachWordInfo() {
   let clicked = false;
 
   customSpans.forEach((span) => {
-    span.addEventListener("mouseenter", (event) => {
+    const wordInfo: WordInfoObject = {
+      originalWord: span.getAttribute("data-original-word"),
+      translatedWord: span.getAttribute("data-translated-word"),
+      languageFrom: span.getAttribute("data-language-from"),
+      languageTo: span.getAttribute("data-language-to"),
+    };
+
+    span.addEventListener("mouseenter", () => {
       if (!clicked) {
-        const target = event.target as HTMLElement;
-        const content = target.textContent || "";
-        const { pageX, pageY } = event as MouseEvent;
-        wordInfoContainer = showWordInfo(content, pageX, pageY);
+        const rect = span.getBoundingClientRect();
+        const { left, top } = rect;
+        wordInfoContainer = showWordInfo(wordInfo, left, top);
       }
     });
 
-    span.addEventListener("mousemove", (event) => {
+    span.addEventListener("mousemove", () => {
       if (wordInfoContainer && !clicked) {
-        const { pageX, pageY } = event as MouseEvent;
-        wordInfoContainer.style.left = `${pageX + 10}px`;
-        wordInfoContainer.style.top = `${pageY - 90}px`;
+        const rect = span.getBoundingClientRect();
+        const { left, top } = rect;
+        wordInfoContainer.style.left = `${left + 10}px`;
+        wordInfoContainer.style.top = `${top - 90}px`;
       }
     });
 
