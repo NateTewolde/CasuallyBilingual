@@ -91,6 +91,7 @@ const setTextColor = (color: string) => {
 
   for (const spanElement of spanElements) {
     spanElement.style.color = color;
+    spanElement.setAttribute("data-text-color", color);
   }
 };
 
