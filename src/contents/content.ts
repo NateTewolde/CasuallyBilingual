@@ -15,7 +15,7 @@ async function getOptionValues() {
 async function main() {
   const { percent, languageFrom, languageTo } = await getOptionValues();
   addSpan(Number(percent));
-  translateSpanWords(languageFrom, languageTo);
+  await translateSpanWords(languageFrom, languageTo);
   setTextColor("green");
   attachWordInfo();
 }
