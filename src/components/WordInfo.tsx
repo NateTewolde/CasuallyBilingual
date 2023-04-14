@@ -53,7 +53,6 @@ const StyledTranslatedWord = styled.p<StyledTranslatedWordProps>`
 `;
 
 const WordInfo = ({ wordInfo }: WordInfoProp) => {
-  console.log(wordInfo.languageFrom);
   return (
     <StyledWordInfo className="word-info">
       <StyledWordInfoHeader>Casually Bilingual</StyledWordInfoHeader>
