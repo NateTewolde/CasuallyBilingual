@@ -15,6 +15,7 @@
     "plasmo": "0.67.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "styled-components": "^5.3.9",
     "uniqid": "^5.4.0"
   },
   "devDependencies": {
@@ -23,6 +24,7 @@
     "@types/node": "18.15.11",
     "@types/react": "18.0.33",
     "@types/react-dom": "18.0.11",
+    "@types/styled-components": "^5.1.26",
     "@types/uniqid": "^5.3.2",
     "prettier": "2.8.7",
     "typescript": "5.0.3"
