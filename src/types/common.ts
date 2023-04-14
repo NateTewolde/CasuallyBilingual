@@ -33,8 +33,13 @@ export interface WordInfoObject {
   translatedWord: string | null;
   languageFrom: string | null;
   languageTo: string | null;
+  textColor: string | null;
 }
 
 export interface WordInfoProp {
   wordInfo: WordInfoObject;
+}
+
+export interface StyledTranslatedWordProps {
+  textColor?: string | null;
 }
