@@ -95,8 +95,19 @@ const setTextColor = (color: string) => {
   }
 };
 
+const setBackgroundColor = (color: string) => {
+  const spanElements = document.querySelectorAll<HTMLElement>(
+    ".casually-bilingual-custom"
+  );
+
+  for (const spanElement of spanElements) {
+    spanElement.style.backgroundColor = color;
+    spanElement.setAttribute("data-background-color", color);
+  }
+};
+
 const addSpan = (percent: number) => {
   traverseNodes(document.body, percent);
 };
 
-export { addSpan, translateSpanWords, setTextColor };
+export { addSpan, translateSpanWords, setTextColor, setBackgroundColor };
