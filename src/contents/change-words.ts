@@ -68,7 +68,14 @@ const translateSpanWords = async (languageFrom: string, languageTo: string) => {
       for (let i = 0; i < batch.length; i++) {
         const translatedText = translatedWords[i];
         if (translatedText) {
+          batch[i].setAttribute(
+            "data-original-word",
+            batch[i].textContent || ""
+          );
           batch[i].textContent = translatedText;
+          batch[i].setAttribute("data-translated-word", translatedText);
+          batch[i].setAttribute("data-language-from", languageFrom);
+          batch[i].setAttribute("data-language-to", languageTo);
         }
       }
     }
