@@ -28,6 +28,13 @@ export interface UpdateOptionsBtnProp {
   ) => void;
 }
 
+export interface WordInfoObject {
+  originalWord: string | null;
+  translatedWord: string | null;
+  languageFrom: string | null;
+  languageTo: string | null;
+}
+
 export interface WordInfoProp {
-  content: string;
+  wordInfo: WordInfoObject;
 }
