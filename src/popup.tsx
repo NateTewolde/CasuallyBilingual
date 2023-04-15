@@ -44,62 +44,49 @@ function IndexPopup() {
   ]);
 
   const optionRefs = {
-    percentRef: useRef({ optionLabel: "percent", optionValue: percent }),
-    languageFromRef: useRef({
+    percent: useRef({ optionLabel: "percent", optionValue: percent }),
+    languageFrom: useRef({
       optionLabel: "languageFrom",
       optionValue: languageFrom,
     }),
-    languageToRef: useRef({
-      optionLabel: "languageTo",
-      optionValue: languageTo,
-    }),
-    textColorRef: useRef({
-      optionLabel: "textColor",
-      optionValue: textColor,
-    }),
-    backgroundColorRef: useRef({
+    languageTo: useRef({ optionLabel: "languageTo", optionValue: languageTo }),
+    textColor: useRef({ optionLabel: "textColor", optionValue: textColor }),
+    backgroundColor: useRef({
       optionLabel: "backgroundColor",
       optionValue: backgroundColor,
     }),
   };
 
+  const stateSetters = {
+    percent: setPercent,
+    languageFrom: setLanguageFrom,
+    languageTo: setLanguageTo,
+    textColor: setTextColor,
+    backgroundColor: setBackgroundColor,
+  };
+
+  const storageSetters = {
+    percent: setPercentStorage,
+    languageFrom: setLanguageFromStorage,
+    languageTo: setLanguageToStorage,
+    textColor: setTextColorStorage,
+    backgroundColor: setBackgroundColorStorage,
+  };
+  type OptionKey =
+    | "percent"
+    | "languageFrom"
+    | "languageTo"
+    | "textColor"
+    | "backgroundColor";
+
   const handleOptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const label = `${e.target.dataset.label}`;
 
-    if (label === "percent") {
-      optionRefs.percentRef.current = {
-        optionLabel: "percent",
-        optionValue: Number(e.target.value),
-      };
-    }
-    if (label === "languageFrom") {
-      optionRefs.languageFromRef.current = {
-        optionLabel: "languageFrom",
-        optionValue: e.target.value,
-      };
-    }
-    if (label === "languageTo") {
-      optionRefs.languageToRef.current = {
-        optionLabel: "languageTo",
-        optionValue: e.target.value,
-      };
-    }
-    if (label === "languageTo") {
-      optionRefs.languageToRef.current = {
-        optionLabel: "languageTo",
-        optionValue: e.target.value,
-      };
-    }
-    if (label === "textColor") {
-      optionRefs.textColorRef.current = {
-        optionLabel: "textColor",
-        optionValue: e.target.value,
-      };
-    }
-    if (label === "backgroundColor") {
-      optionRefs.backgroundColorRef.current = {
-        optionLabel: "backgroundColor",
-        optionValue: e.target.value,
+    if (optionRefs[label as OptionKey]) {
+      optionRefs[label as OptionKey].current = {
+        optionLabel: label,
+        optionValue:
+          label === "percent" ? Number(e.target.value) : e.target.value,
       };
     }
   };
@@ -107,29 +94,13 @@ function IndexPopup() {
   const handleUpdateClick = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
-    setPercent(optionRefs.percentRef.current.optionValue || percent);
-    setLanguageFrom(
-      optionRefs.languageFromRef.current.optionValue || languageFrom
-    );
-    setLanguageTo(optionRefs.languageToRef.current.optionValue || languageTo);
-    setTextColor(optionRefs.textColorRef.current.optionValue || textColor);
-    setBackgroundColor(
-      optionRefs.backgroundColorRef.current.optionValue || backgroundColor
-    );
-
-    setPercentStorage(optionRefs.percentRef.current.optionValue || percent);
-    setLanguageFromStorage(
-      optionRefs.languageFromRef.current.optionValue || languageFrom
-    );
-    setLanguageToStorage(
-      optionRefs.languageToRef.current.optionValue || languageTo
-    );
-    setTextColorStorage(
-      optionRefs.textColorRef.current.optionValue || textColor
-    );
-    setBackgroundColorStorage(
-      optionRefs.backgroundColorRef.current.optionValue || backgroundColor
-    );
+    for (const label in optionRefs) {
+      const newValue = optionRefs[label as OptionKey].current.optionValue;
+      if (newValue) {
+        stateSetters[label as OptionKey](newValue);
+        storageSetters[label as OptionKey](newValue);
+      }
+    }
 
     // Send a message to the content script to reload the page
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
