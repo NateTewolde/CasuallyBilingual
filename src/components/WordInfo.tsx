@@ -45,10 +45,12 @@ const StyledLanguageHeader = styled.h2`
 
 const StyledOriginalWord = styled.p`
   font-size: 0.9rem;
+  text-align: center;
 `;
 
 const StyledTranslatedWord = styled.p<StyledTranslatedWordProps>`
   font-size: 0.9rem;
+  text-align: center;
   color: ${(props) => props.textColor || "black"};
 `;
 
