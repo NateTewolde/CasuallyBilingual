@@ -1,19 +1,30 @@
 import { useStorage } from "@plasmohq/storage/hook";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ActiveToggle from "~components/ActiveToggle";
 import ConfigOptions from "~components/ConfigOptions";
 import Title from "~components/Title";
 import TranslationDesc from "~components/TranslationDesc";
 import UpdateOptionsBtn from "~components/UpdateOptionsBtn";
-import type { OptionInfo, TranslationInfo } from "~types/common";
+import type { OptionInfo } from "~types/common";
 
 function IndexPopup() {
-  const [percent, setPercent] = useStorage("percentKey", 15);
-  const [languageFrom, setLanguageFrom] = useStorage(
-    "languageFromKey",
-    `English`
+  const [percentStorage, setPercentStorage] = useStorage("percentStorage");
+  const [languageFromStorage, setLanguageFromStorage] = useStorage(
+    "languageFromStorage"
   );
-  const [languageTo, setLanguageTo] = useStorage("languageToKey", "Arabic");
+  const [languageToStorage, setLanguageToStorage] =
+    useStorage("languageToStorage");
+
+  const [percent, setPercent] = useState<number>(percentStorage);
+  const [languageFrom, setLanguageFrom] = useState<string>(languageFromStorage);
+  const [languageTo, setLanguageTo] = useState<string>(languageToStorage);
+
+  // Updates local state with storage
+  useEffect(() => {
+    setPercent(percentStorage);
+    setLanguageFrom(languageFromStorage);
+    setLanguageTo(languageToStorage);
+  }, [percentStorage, languageFromStorage, languageToStorage]);
 
   const optionRefs = {
     percentRef: useRef({ optionLabel: "percent", optionValue: percent }),
@@ -53,9 +64,18 @@ function IndexPopup() {
   const handleUpdateClick = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
-    setPercent(optionRefs.percentRef.current.optionValue);
-    setLanguageFrom(optionRefs.languageFromRef.current.optionValue);
-    setLanguageTo(optionRefs.languageToRef.current.optionValue);
+    setPercent(optionRefs.percentRef.current.optionValue || percent);
+    setLanguageFrom(
+      optionRefs.languageFromRef.current.optionValue || languageFrom
+    );
+    setLanguageTo(optionRefs.languageToRef.current.optionValue || languageTo);
+    setPercentStorage(optionRefs.percentRef.current.optionValue || percent);
+    setLanguageFromStorage(
+      optionRefs.languageFromRef.current.optionValue || languageFrom
+    );
+    setLanguageToStorage(
+      optionRefs.languageToRef.current.optionValue || languageTo
+    );
 
     // Send a message to the content script to reload the page
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
