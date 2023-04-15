@@ -20,7 +20,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 const storage = new Storage();
 
 (async () => {
-  // Set default values if they don't exist yet
+  // Store option values and set defaults if not stored yet.
   if (!(await storage.get("percentStorage"))) {
     await storage.set("percentStorage", 15);
   }
@@ -29,5 +29,11 @@ const storage = new Storage();
   }
   if (!(await storage.get("languageToStorage"))) {
     await storage.set("languageToStorage", "Arabic");
+  }
+  if (!(await storage.get("textColorStorage"))) {
+    await storage.set("textColorStorage", "green");
+  }
+  if (!(await storage.get("backgroundColorStorage"))) {
+    await storage.set("backgroundColorStorage", "white");
   }
 })();

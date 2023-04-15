@@ -14,17 +14,34 @@ function IndexPopup() {
   );
   const [languageToStorage, setLanguageToStorage] =
     useStorage("languageToStorage");
+  const [textColorStorage, setTextColorStorage] =
+    useStorage("textColorStorage");
+  const [backgroundColorStorage, setBackgroundColorStorage] = useStorage(
+    "backgroundColorStorage"
+  );
 
   const [percent, setPercent] = useState<number>(percentStorage);
   const [languageFrom, setLanguageFrom] = useState<string>(languageFromStorage);
   const [languageTo, setLanguageTo] = useState<string>(languageToStorage);
+  const [textColor, setTextColor] = useState(textColorStorage);
+  const [backgroundColor, setBackgroundColor] = useState(
+    backgroundColorStorage
+  );
 
   // Updates local state with storage
   useEffect(() => {
     setPercent(percentStorage);
     setLanguageFrom(languageFromStorage);
     setLanguageTo(languageToStorage);
-  }, [percentStorage, languageFromStorage, languageToStorage]);
+    setTextColor(textColorStorage);
+    setBackgroundColor(backgroundColorStorage);
+  }, [
+    percentStorage,
+    languageFromStorage,
+    languageToStorage,
+    textColorStorage,
+    backgroundColorStorage,
+  ]);
 
   const optionRefs = {
     percentRef: useRef({ optionLabel: "percent", optionValue: percent }),
@@ -35,6 +52,14 @@ function IndexPopup() {
     languageToRef: useRef({
       optionLabel: "languageTo",
       optionValue: languageTo,
+    }),
+    textColorRef: useRef({
+      optionLabel: "textColor",
+      optionValue: textColor,
+    }),
+    backgroundColorRef: useRef({
+      optionLabel: "backgroundColor",
+      optionValue: backgroundColor,
     }),
   };
 
@@ -59,6 +84,24 @@ function IndexPopup() {
         optionValue: e.target.value,
       };
     }
+    if (label === "languageTo") {
+      optionRefs.languageToRef.current = {
+        optionLabel: "languageTo",
+        optionValue: e.target.value,
+      };
+    }
+    if (label === "textColor") {
+      optionRefs.textColorRef.current = {
+        optionLabel: "textColor",
+        optionValue: e.target.value,
+      };
+    }
+    if (label === "backgroundColor") {
+      optionRefs.backgroundColorRef.current = {
+        optionLabel: "backgroundColor",
+        optionValue: e.target.value,
+      };
+    }
   };
 
   const handleUpdateClick = (
@@ -69,12 +112,23 @@ function IndexPopup() {
       optionRefs.languageFromRef.current.optionValue || languageFrom
     );
     setLanguageTo(optionRefs.languageToRef.current.optionValue || languageTo);
+    setTextColor(optionRefs.textColorRef.current.optionValue || textColor);
+    setBackgroundColor(
+      optionRefs.backgroundColorRef.current.optionValue || backgroundColor
+    );
+
     setPercentStorage(optionRefs.percentRef.current.optionValue || percent);
     setLanguageFromStorage(
       optionRefs.languageFromRef.current.optionValue || languageFrom
     );
     setLanguageToStorage(
       optionRefs.languageToRef.current.optionValue || languageTo
+    );
+    setTextColorStorage(
+      optionRefs.textColorRef.current.optionValue || textColor
+    );
+    setBackgroundColorStorage(
+      optionRefs.backgroundColorRef.current.optionValue || backgroundColor
     );
 
     // Send a message to the content script to reload the page
@@ -104,6 +158,20 @@ function IndexPopup() {
       option: "To?",
       optionType: "languageTo",
       optionVal: languageTo,
+      handleOptionChange: (e: React.ChangeEvent<HTMLInputElement>) =>
+        handleOptionChange(e),
+    },
+    {
+      option: "Text Color",
+      optionType: "textColor",
+      optionVal: textColor,
+      handleOptionChange: (e: React.ChangeEvent<HTMLInputElement>) =>
+        handleOptionChange(e),
+    },
+    {
+      option: "Background Color",
+      optionType: "backgroundColor",
+      optionVal: backgroundColor,
       handleOptionChange: (e: React.ChangeEvent<HTMLInputElement>) =>
         handleOptionChange(e),
     },
