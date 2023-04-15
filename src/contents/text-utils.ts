@@ -9,14 +9,12 @@ async function translateText(text: string, from: string, to: string) {
       return;
     }
 
-    //splits text into chunks
     const chunkSize = 1000;
     const textChunks = [];
     for (let i = 0; i < text.length; i += chunkSize) {
       textChunks.push(text.slice(i, i + chunkSize));
     }
 
-    //translates each chunk and join the results
     const translatedChunks = [];
     for (const chunk of textChunks) {
       const res = await translate(chunk, { from: from, to: to });
@@ -35,6 +33,27 @@ async function translateText(text: string, from: string, to: string) {
   }
 }
 
+// Calls background script to translateText to avoid CORS error.
+const getTranslation = (
+  text: string,
+  from: string,
+  to: string
+): Promise<string> => {
+  return new Promise((resolve, reject) => {
+    chrome.runtime.sendMessage(
+      { action: "translate", text: text, from: from, to: to },
+      (response) => {
+        if (response.error) {
+          console.error(response.error);
+          resolve(text);
+        } else {
+          resolve(response.translatedText);
+        }
+      }
+    );
+  });
+};
+
 const isInsideAttribute = (node: Node): boolean | null => {
   return (
     node.parentNode &&
@@ -48,4 +67,4 @@ function isWord(text: string): boolean {
   return regex.test(text); // Test if the input text matches the regular expression
 }
 
-export { isWord, isInsideAttribute, translateText };
+export { isWord, isInsideAttribute, translateText, getTranslation };
