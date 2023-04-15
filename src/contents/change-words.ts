@@ -1,5 +1,5 @@
 import { isWord, isInsideAttribute } from "./text-utils";
-import translateWord from "./translate";
+import { getTranslation } from "./text-utils";
 
 const wrapWordsInSpan = (text: string, percentage: number): string => {
   const words = text.split(" ");
@@ -56,7 +56,7 @@ const translateSpanWords = async (languageFrom: string, languageTo: string) => {
     const batchText = batch
       .map((element) => element.textContent || "")
       .join("\n");
-    const translatedBatchText = await translateWord(
+    const translatedBatchText = await getTranslation(
       batchText,
       languageFrom,
       languageTo
