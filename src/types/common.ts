@@ -43,3 +43,8 @@ export interface WordInfoProp {
 export interface StyledTranslatedWordProps {
   textColor?: string | null;
 }
+
+export interface BatchTranslation {
+  translatedBatchText: string;
+  translatedPronunText: string;
+}
