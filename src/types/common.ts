@@ -34,6 +34,7 @@ export interface WordInfoObject {
   languageFrom: string | null;
   languageTo: string | null;
   textColor: string | null;
+  pronunWord: string | null;
 }
 
 export interface WordInfoProp {
