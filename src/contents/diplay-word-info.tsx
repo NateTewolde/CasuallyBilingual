@@ -29,6 +29,7 @@ function attachWordInfo() {
       languageFrom: span.getAttribute("data-language-from"),
       languageTo: span.getAttribute("data-language-to"),
       textColor: span.getAttribute("data-text-color"),
+      pronunWord: span.getAttribute("data-pronun-word"),
     };
 
     span.addEventListener("mouseenter", () => {
