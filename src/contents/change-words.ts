@@ -64,9 +64,11 @@ const translateSpanWords = async (languageFrom: string, languageTo: string) => {
 
     if (translatedBatchText) {
       const translatedWords = translatedBatchText.split("\n");
+      const pronunWords = pronunBatchText.split("\n");
 
       for (let i = 0; i < batch.length; i++) {
         const translatedText = translatedWords[i];
+        const pronunText = pronunWords[i];
         if (translatedText) {
           batch[i].setAttribute(
             "data-original-word",
@@ -76,6 +78,7 @@ const translateSpanWords = async (languageFrom: string, languageTo: string) => {
           batch[i].setAttribute("data-translated-word", translatedText);
           batch[i].setAttribute("data-language-from", languageFrom);
           batch[i].setAttribute("data-language-to", languageTo);
+          batch[i].setAttribute("data-pronun-word", pronunText);
         }
       }
     }
