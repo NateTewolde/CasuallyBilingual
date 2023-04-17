@@ -44,7 +44,7 @@ export interface StyledTranslatedWordProps {
   textColor?: string | null;
 }
 
-export interface BatchTranslation {
+export interface BatchTranslations {
   translatedBatchText: string;
   translatedPronunText: string;
 }
