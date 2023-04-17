@@ -56,7 +56,7 @@ const translateSpanWords = async (languageFrom: string, languageTo: string) => {
     const batchText = batch
       .map((element) => element.textContent || "")
       .join("\n");
-    const translatedBatchText = await getTranslation(
+    const { translatedBatchText, pronunBatchText } = await getTranslation(
       batchText,
       languageFrom,
       languageTo
