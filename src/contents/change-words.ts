@@ -31,7 +31,11 @@ const traverseNodes = (node: Node, percent: number) => {
   }
 };
 
-const translateSpanWords = async (languageFrom: string, languageTo: string) => {
+const translateSpanWords = async (
+  languageFrom: string,
+  languageTo: string,
+  translit: string
+) => {
   const spannedWords = document.querySelectorAll<HTMLElement>(
     ".casually-bilingual-custom"
   );
@@ -74,7 +78,12 @@ const translateSpanWords = async (languageFrom: string, languageTo: string) => {
             "data-original-word",
             batch[i].textContent || ""
           );
-          batch[i].textContent = translatedText;
+          if (translit === "yes") {
+            batch[i].textContent = pronunText;
+          } else {
+            batch[i].textContent = translatedText;
+          }
+
           batch[i].setAttribute("data-translated-word", translatedText);
           batch[i].setAttribute("data-language-from", languageFrom);
           batch[i].setAttribute("data-language-to", languageTo);
