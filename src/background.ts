@@ -36,6 +36,6 @@ const storage = new Storage();
     await storage.set("backgroundColorStorage", "white");
   }
   if (!(await storage.get("translitStorage"))) {
-    await storage.set("translitStorage", "false");
+    await storage.set("translitStorage", "no");
   }
 })();
