@@ -35,4 +35,7 @@ const storage = new Storage();
   if (!(await storage.get("backgroundColorStorage"))) {
     await storage.set("backgroundColorStorage", "white");
   }
+  if (!(await storage.get("translitStorage"))) {
+    await storage.set("translitStorage", "false");
+  }
 })();
