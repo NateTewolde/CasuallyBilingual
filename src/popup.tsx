@@ -19,6 +19,7 @@ function IndexPopup() {
   const [backgroundColorStorage, setBackgroundColorStorage] = useStorage(
     "backgroundColorStorage"
   );
+  const [translitStorage, setTranslitStorage] = useStorage("translitStorage");
 
   const [percent, setPercent] = useState<number>(percentStorage);
   const [languageFrom, setLanguageFrom] = useState<string>(languageFromStorage);
@@ -27,6 +28,7 @@ function IndexPopup() {
   const [backgroundColor, setBackgroundColor] = useState(
     backgroundColorStorage
   );
+  const [translit, setTranslit] = useState(translitStorage);
 
   // Updates local state with storage
   useEffect(() => {
@@ -35,12 +37,14 @@ function IndexPopup() {
     setLanguageTo(languageToStorage);
     setTextColor(textColorStorage);
     setBackgroundColor(backgroundColorStorage);
+    setTranslit(translitStorage);
   }, [
     percentStorage,
     languageFromStorage,
     languageToStorage,
     textColorStorage,
     backgroundColorStorage,
+    translitStorage,
   ]);
 
   const optionRefs = {
@@ -55,6 +59,7 @@ function IndexPopup() {
       optionLabel: "backgroundColor",
       optionValue: backgroundColor,
     }),
+    translit: useRef({ optionLabel: "translit", optionValue: translit }),
   };
 
   const stateSetters = {
@@ -63,6 +68,7 @@ function IndexPopup() {
     languageTo: setLanguageTo,
     textColor: setTextColor,
     backgroundColor: setBackgroundColor,
+    translit: setTranslit,
   };
 
   const storageSetters = {
@@ -71,13 +77,15 @@ function IndexPopup() {
     languageTo: setLanguageToStorage,
     textColor: setTextColorStorage,
     backgroundColor: setBackgroundColorStorage,
+    translit: setTranslitStorage,
   };
   type OptionKey =
     | "percent"
     | "languageFrom"
     | "languageTo"
     | "textColor"
-    | "backgroundColor";
+    | "backgroundColor"
+    | "translit";
 
   const handleOptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const label = `${e.target.dataset.label}`;
@@ -143,6 +151,13 @@ function IndexPopup() {
       option: "Background Color",
       optionType: "backgroundColor",
       optionVal: backgroundColor,
+      handleOptionChange: (e: React.ChangeEvent<HTMLInputElement>) =>
+        handleOptionChange(e),
+    },
+    {
+      option: "Transliterate?",
+      optionType: "translit",
+      optionVal: translit,
       handleOptionChange: (e: React.ChangeEvent<HTMLInputElement>) =>
         handleOptionChange(e),
     },
