@@ -58,6 +58,7 @@ const WordInfo = ({ wordInfo }: WordInfoProp) => {
   return (
     <StyledWordInfo className="word-info">
       <StyledWordInfoHeader>Casually Bilingual</StyledWordInfoHeader>
+      <div>{wordInfo.pronunWord}</div>
       <StyledWordInfoDesc>
         <StyledOriginalDiv>
           <StyledLanguageHeader>{wordInfo.languageFrom}</StyledLanguageHeader>
