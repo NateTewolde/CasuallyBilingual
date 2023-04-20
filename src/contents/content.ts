@@ -26,15 +26,29 @@ async function getOptionValues() {
   const languageTo = await storage.get("languageToStorage");
   const textColor = await storage.get("textColorStorage");
   const backgroundColor = await storage.get("backgroundColorStorage");
+  const translit = await storage.get("translitStorage");
 
-  return { percent, languageFrom, languageTo, textColor, backgroundColor };
+  return {
+    percent,
+    languageFrom,
+    languageTo,
+    textColor,
+    backgroundColor,
+    translit,
+  };
 }
 
 async function main() {
-  const { percent, languageFrom, languageTo, textColor, backgroundColor } =
-    await getOptionValues();
+  const {
+    percent,
+    languageFrom,
+    languageTo,
+    textColor,
+    backgroundColor,
+    translit,
+  } = await getOptionValues();
   addSpan(Number(percent));
-  await translateSpanWords(languageFrom, languageTo);
+  await translateSpanWords(languageFrom, languageTo, translit);
   setTextColor(textColor);
   setBackgroundColor(backgroundColor);
   attachWordInfo();
