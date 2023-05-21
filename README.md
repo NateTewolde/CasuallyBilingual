@@ -70,4 +70,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Other Projects
 
-Check out my other projects on GitHub [here](https://github.com/example).
+Check out my other projects on GitHub [here](https://github.com/NateTewolde).
