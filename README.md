@@ -43,7 +43,7 @@ During the development of this extension, I faced a few challenges:
   - **Solution**: I utilized the Google Translate API to handle the translation process, which greatly simplified the task.
 
 - **Challenge 2**: Storing user preferences and settings across sessions was another hurdle.
-  - **Solution**: I used local storage to persist user settings, ensuring a consistent user experience across browsing sessions.
+  - **Solution**: I used Plasmo's Storage API to persist user settings, ensuring a consistent user experience across browsing sessions.
 
 ## Future Enhancements
 
