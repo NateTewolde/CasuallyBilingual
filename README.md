@@ -1,33 +1,64 @@
-This is a [Plasmo extension](https://docs.plasmo.com/) project bootstrapped with [`plasmo init`](https://www.npmjs.com/package/plasmo).
+# Casually Bilingual
 
-## Getting Started
+Casually Bilingual is a Chrome extension that allows users to casually learn a new language while browsing the web. It translates a percentage of the webpage text from one language to another. The extension is customizable, allowing users to adjust the percentage of translation, text color, and background color.
 
-First, run the development server:
+## Table of Contents
+- [Installation](#installation)
+- [Usage](#usage)
+- [Challenges and Solutions](#challenges-and-solutions)
+- [Future Enhancements](#future-enhancements)
+- [Contributing](#contributing)
+- [License](#license)
+- [Acknowledgments](#acknowledgments)
+- [Demo](#demo)
 
-```bash
-pnpm dev
-# or
-npm run dev
-```
+## Installation
 
-Open your browser and load the appropriate development build. For example, if you are developing for the chrome browser, using manifest v3, use: `build/chrome-mv3-dev`.
+1. Add the extension from the Chrome Web Store [here](https://chrome.google.com/webstore/detail/casually-bilingual/jfeabfigfjbfaidmdlcdpipdboladkie?hl=en).
+2. Click on the extension icon and choose your settings.
 
-You can start editing the popup by modifying `popup.tsx`. It should auto-update as you make changes. To add an options page, simply add a `options.tsx` file to the root of the project, with a react component default exported. Likewise to add a content page, add a `content.ts` file to the root of the project, importing some module and do some logic, then reload the extension on your browser.
+## Usage
 
-For further guidance, [visit our Documentation](https://docs.plasmo.com/)
+After installation and setting up your preferences, simply navigate to a webpage. A percentage of the webpage text, based on your settings, will be translated into your chosen language.
 
-## Making production build
+## Challenges and Solutions
 
-Run the following:
+During the development of this extension, we faced a few challenges:
 
-```bash
-pnpm build
-# or
-npm run build
-```
+- **Challenge 1**: Implementing the translation feature was initially a challenge due to the complexity of handling different languages and scripts.
+  - **Solution**: We utilized the [Google Translate API](https://github.com/AidanWelch/google-translate-api) to handle the translation process, which greatly simplified the task.
 
-This should create a production bundle for your extension, ready to be zipped and published to the stores.
+- **Challenge 2**: Storing user preferences and settings across sessions was another hurdle.
+  - **Solution**: We utilized Plasmo's storage API to persist user settings, ensuring a consistent user experience across browsing sessions.
 
-## Submit to the webstores
+## Future Enhancements
 
-The easiest way to deploy your Plasmo extension is to use the built-in [bpp](https://bpp.browser.market) GitHub action. Prior to using this action however, make sure to build your extension and upload the first version to the store to establish the basic credentials. Then, simply follow [this setup instruction](https://docs.plasmo.com/framework/workflows/submit) and you should be on your way for automated submission!
+We're always looking to improve Casually Bilingual. Here are some features we're planning to add:
+
+1. Text-to-speech functionality for users to hear the pronunciation of translated words.
+2. Transliteration and text-to-speech support for Tigrinya.
+3. Blacklisted Websites and Words
+4. A feature for users to add words to a personal dictionary.
+5. Full sentence translation capability.
+6. A feature to allow users to highlight and translate specific sections of text.
+7. Integration with other browsers beyond Chrome.
+
+## Contributing
+
+We welcome contributions to Casually Bilingual! If you have an idea for a feature or enhancement, feel free to open an issue to discuss it. Please ensure your pull requests adhere to the following guidelines:
+
+- Write clear, concise commit messages.
+- Ensure your changes do not break any existing functionality.
+- Update the README with details of changes to the interface, this includes new environment variables, exposed ports, useful file locations, and container parameters.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+
+## Acknowledgments
+
+Thanks to [Aidan Welch](https://github.com/AidanWelch) for his fork of the Google Translate API, which was instrumental in the development of this extension.
+
+## Demo
+
+coming soon...
